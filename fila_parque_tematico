@@ -1,0 +1,45 @@
+class Node:
+    def __init__(self,visitante):
+        self.visitante = visitante
+        self.next = None
+        self.prev = None
+
+
+class ParqueTematico:
+    def __init__ (self):
+        self.head = None
+        self.tail = None
+
+
+    def entrar_na_fila(self,visitante):
+        new_visitante = Node(visitante)
+        if (self.head is None):
+            self.head = new_visitante
+            self.tail = new_visitante
+        else:
+            new_visitante.prev = self.tail
+            self.tail.next = new_visitante
+            self.tail = new_visitante
+             
+
+
+    def sair_da_fila(self):
+        if(self.head is not None):
+            self.head = self.head.next
+        else:
+            print("A fila está vazia")
+   
+    def exibir_fila(self):
+        current = self.head
+        while current is not None:
+            print(current.visitante)
+            current = current.next
+   
+filaparque = ParqueTematico()
+filaparque.entrar_na_fila("Bernardo")
+filaparque.entrar_na_fila("Giulia")
+filaparque.entrar_na_fila("Peri")
+filaparque.exibir_fila()
+
+
+

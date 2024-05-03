@@ -1,0 +1,76 @@
+class Node:
+    def __init__(self,nome):
+        self.nome = nome
+        self.next = None
+
+
+class Fila:
+    def __init__ (self):
+        self.head = None
+        self.tamanho = 0
+
+
+    def enqueue(self,nome):
+        new_node = Node(nome)
+        if self.head is None:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next is not None:
+                current = current.next
+            current.next = new_node
+        self.tamanho += 1
+
+
+    def print_queue(self):
+        current = self.head
+        while current is not None:
+            print(current.nome)
+            current = current.next
+
+
+    def dequeue(self):
+        if (self.tamanho != 0):
+            self.head = self.head.next
+            self.tamanho -= 1
+        else:
+            print("Erro: a lista está vazia")
+   
+    def length(self):
+        print("O tamanho da sua lista é:" , self.tamanho)
+
+
+    def is_empty(self):
+        if (self.head is None):
+            print("A lista está vazia")
+        else:
+            print("A lista não está vazia")
+            self.length()
+   
+    def front(self):
+        primeiro_nome = self.head
+        if primeiro_nome is not None:
+            print("O primeiro elemento da lista é:" , primeiro_nome.nome)
+        else:
+            print("A lista ta vazia")
+
+
+
+
+fila = Fila()
+fila.enqueue("Bernardo")
+fila.enqueue("Giulia")
+fila.print_queue()
+fila.front()
+print('-------')
+fila.dequeue()
+fila.print_queue()
+fila.front()
+print('-------')
+fila.enqueue("Marcos")
+fila.enqueue("Bernardo")
+fila.print_queue()
+fila.is_empty()
+print('-------')
+fila.front()
+
