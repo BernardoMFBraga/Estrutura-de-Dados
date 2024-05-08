@@ -1,0 +1,8 @@
+def fatorial(n):
+    if (n == 0 or n == 1):
+        return 1 
+    else: 
+        return n * fatorial(n-1)
+    
+x = int(input("Insira o numero que você deseja calcular o fatorial "))
+res = print("O fatorial de ", x, " é igual a ", fatorial(x))
