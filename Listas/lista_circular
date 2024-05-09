@@ -1,0 +1,56 @@
+class Node:
+    def __init__(self, idade, nome, genero, doenca):
+        self.idade = idade
+        self.nome = nome
+        self.genero = genero
+        self.doenca = doenca
+        self.next = None
+
+class Hospital:
+    def __init__(self):
+        self.head = None
+    
+    def entrar_na_fila(self, idade, nome, genero, doenca):
+        new_paciente = Node(idade, nome, genero, doenca)
+        if (self.head is None):
+            self.head = new_paciente
+            new_paciente.next = self.head
+        elif (idade >= self.head.idade):
+            current = self.head
+            while current.next != self.head and idade >= current.next.idade:
+                current = current.next
+            new_paciente.next = current.next
+            current.next = new_paciente
+        else:
+            current = self.head
+            while current.next != self.head:
+                current = current.next
+            current.next = new_paciente
+            new_paciente.next = self.head
+            self.head = new_paciente
+
+    def mostrar_fila(self):
+        if self.head is None:
+            print("Fila vazia")
+            return
+        current = self.head
+        print("Fila de pacientes: \n")
+        while True:
+            print("Nome:", current.nome)
+            print("Idade:", current.idade) 
+            print("Gênero:", current.genero)
+            print("Doença:", current.doenca, "\n")
+            current = current.next
+            if current == self.head:
+                break
+
+# Teste
+hospital_portugues = Hospital()
+hospital_portugues.entrar_na_fila(20, "Bernardo", "Masculino", "Resfriado")
+hospital_portugues.entrar_na_fila(8, "Giulia", "Feminino", "Fratura")
+hospital_portugues.entrar_na_fila(47, "Peri", "Masculino", "Infecção")
+hospital_portugues.entrar_na_fila(62, "Lais", "Feminino", "Enxaqueca")
+hospital_portugues.entrar_na_fila(87, "Darlan", "Masculino", "Covid-19")
+hospital_portugues.entrar_na_fila(11, "Enaldo", "Masculino", "Resfriado")
+
+hospital_portugues.mostrar_fila()

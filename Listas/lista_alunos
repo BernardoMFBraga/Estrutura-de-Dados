@@ -1,0 +1,55 @@
+#criação do nó para trabalharmos com listas ligadas
+class Node:
+    def __init__(self,nome,matricula,nota):
+        self.nome = nome
+        self.matricula = matricula
+        self.nota = nota
+        self.next = None
+
+#criação da classe registros, para armazenar os dados dos alunos
+class Registros:
+    def __init__(self):
+        self.head = None
+    
+    def adicionar(self,nome,matricula,nota):
+        new_node = Node(nome,matricula,nota)
+        if self.head is None:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next is not None:
+                current = current.next
+            current.next = new_node
+    
+    def remover(self):
+        if self.head is None:
+            print("O registro está vazio")
+        else:
+            self.head = self.head.next
+
+    def exibir_registro(self):
+        current = self.head
+        print("O registro da sala é: \n")
+        while current is not None:
+            print("Nome:", current.nome)
+            print("Matrícula:", current.matricula)
+            print("Nota:", current.nota)
+            print()
+            current = current.next
+    
+
+sala_B01 = Registros()
+sala_B01.adicionar("Bernardo",2018.1,10)
+sala_B01.adicionar("Giulia", 2019.2 , 9.5)
+sala_B01.adicionar("Peri", 2022.1 , 8)
+sala_B01.exibir_registro()
+
+print("/////////////////////////////")
+
+sala_B01.remover()
+sala_B01.exibir_registro()
+
+        
+
+
+ 

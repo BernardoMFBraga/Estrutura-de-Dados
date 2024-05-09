@@ -1,0 +1,13 @@
+def torres_de_hanoi(n, origem, destino, auxiliar):
+    if n == 1:
+        print("Mova o disco de", origem, "para", destino)
+    else:
+        torres_de_hanoi(n-1, origem, auxiliar, destino)
+        print("Mova o disco de", origem, "para", destino)
+        torres_de_hanoi(n-1, auxiliar, destino, origem)
+
+# Teste
+print("Bem vindo as Torres de Hanoi")
+num_discos = int(input("Informe o número de discos que você deseja inicializar em sua torre: "))
+torres_de_hanoi(num_discos, 'A', 'C', 'B')
+print("Cada linha representa um movimento que deve ser feito para solucionar sua torre")
