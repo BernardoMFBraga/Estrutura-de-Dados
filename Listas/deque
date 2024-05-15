@@ -1,0 +1,84 @@
+#Uso de deque para representar um atendimento de hospital
+class Paciente():
+    
+    def __init__(self,nome,idade):
+        self.nome = nome
+        self.idade = idade
+        self.next = None
+        self.prev = None
+
+class Hospital():
+    
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def entrar(self,nome,idade):
+        new_paciente = Paciente(nome,idade)
+        
+        if (self.head is None):
+            self.head = new_paciente
+            self.tail = new_paciente
+        
+        else:
+            self.tail.next = new_paciente
+            new_paciente.prev = self.tail
+            self.tail = new_paciente
+    
+    def entrar_preferencial(self,nome,idade):
+        new_paciente = Paciente(nome,idade)
+
+        if (self.head is None):
+            self.head = new_paciente
+            self.head = new_paciente 
+
+        else: 
+            self.head.prev = new_paciente
+            new_paciente.next = self.head
+            self.head = new_paciente
+
+    def atendido(self):
+       
+        if (self.head is None):
+            print("A fila de pacientes está vazia. Não existe ninguém para ser atendido")
+        
+        else: 
+            self.head = self.head.next
+            
+            if self.head is not None:
+                self.head.prev = None
+
+    def desistir_atendimento(self):
+
+        if(self.head is None):
+            print("A fila de pacientes está vazia")
+
+        else: 
+            self.tail = self.tail.prev
+           
+            if self.tail is not None:
+                self.tail.next = None
+
+    def exibir_fila_atendimento(self):
+        current = self.head
+        while current is not None:
+            print(current.nome , current.idade)
+            current = current.next
+
+
+
+
+hospital_hope = Hospital()
+hospital_hope.entrar("Bernardo",20)
+hospital_hope.entrar("Peri", 19)
+hospital_hope.entrar("Giulia", 21)
+hospital_hope.entrar_preferencial("Idoso", 81)
+hospital_hope.entrar_preferencial("Idoso mais velho", 92)
+hospital_hope.exibir_fila_atendimento()
+
+print("///////////////////////")
+
+hospital_hope.atendido()
+hospital_hope.desistir_atendimento()
+hospital_hope.exibir_fila_atendimento()
+
