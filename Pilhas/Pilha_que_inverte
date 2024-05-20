@@ -1,0 +1,64 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Stack:
+    def __init__(self):
+        self.top = None
+
+    def push(self, data):
+        new_node = Node(data)
+        if not self.top:
+            self.top = new_node
+        else:
+            new_node.next = self.top
+            self.top = new_node
+
+    def pop(self):
+        if not self.top:
+            return None
+        else:
+            popped = self.top.data
+            self.top = self.top.next
+            return popped
+
+    def is_empty(self):
+        return self.top is None
+
+    def reverse_stack(stack):
+        if stack.is_empty():
+            return
+
+        temp_stack = Stack()
+
+        # Passo 1: Empilhar todos os elementos da pilha original em temp_stack
+        while not stack.is_empty():
+            temp_stack.push(stack.pop())
+
+        # Passo 2: Desempilhar temp_stack para stack
+        while not temp_stack.is_empty():
+            stack.push(temp_stack.pop())
+
+# Teste
+def print_stack(stack):
+    current = stack.top
+    while current:
+        print(current.data, end=" ")
+        current = current.next
+    print()
+
+stack = Stack()
+stack.push(1)
+stack.push(2)
+stack.push(3)
+stack.push(4)
+stack.push(5)
+
+print("Pilha original:")
+print_stack(stack)
+
+Stack.reverse_stack(stack)
+
+print("Pilha invertida:")
+print_stack(stack)

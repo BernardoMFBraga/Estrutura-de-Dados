@@ -1,0 +1,72 @@
+class Paciente:
+    def __init__(self, nome, idade):
+        self.nome = nome
+        self.idade = idade
+
+class Hospital:
+    def __init__(self, max_size):
+        self.max_size = max_size
+        self.queue = [None] * max_size
+        self.front = 0
+        self.rear = -1
+        self.size = 0
+
+    def entrar(self, nome, idade):
+        new_paciente = Paciente(nome, idade)
+        if self.size == self.max_size:
+            self.front = (self.front + 1) % self.max_size
+        else:
+            self.size += 1
+        self.rear = (self.rear + 1) % self.max_size
+        self.queue[self.rear] = new_paciente
+
+    def entrar_preferencial(self, nome, idade):
+        new_paciente = Paciente(nome, idade)
+        if self.size == self.max_size:
+            self.front = (self.front + 1) % self.max_size
+        else:
+            self.size += 1
+        self.front = (self.front - 1) % self.max_size
+        self.queue[self.front] = new_paciente
+
+    def atendido(self):
+        if self.size == 0:
+            print("A fila de pacientes está vazia. Não existe ninguém para ser atendido")
+        else:
+            self.queue[self.front] = None
+            self.front = (self.front + 1) % self.max_size
+            self.size -= 1
+
+    def desistir_atendimento(self):
+        if self.size == 0:
+            print("A fila de pacientes está vazia")
+        else:
+            self.queue[self.rear] = None
+            self.rear = (self.rear - 1) % self.max_size
+            self.size -= 1
+
+    def exibir_fila_atendimento(self):
+        if self.size == 0:
+            print("A fila está vazia")
+            return
+        idx = self.front
+        count = 0
+        while count < self.size:
+            paciente = self.queue[idx]
+            print(paciente.nome, paciente.idade)
+            idx = (idx + 1) % self.max_size
+            count += 1
+
+# Exemplo de uso:
+hospital = Hospital(5)
+hospital.entrar("Giu", 30)
+hospital.entrar("Bernardo", 24)
+hospital.entrar("Peri", 35)
+hospital.entrar("Pedro", 27)
+hospital.entrar("Laís", 19)
+hospital.exibir_fila_atendimento()
+print("////////////////// \n")
+
+hospital.entrar("Henrique", 33)
+hospital.entrar("Vitor", 33)
+hospital.exibir_fila_atendimento()

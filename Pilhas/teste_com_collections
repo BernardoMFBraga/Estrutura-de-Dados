@@ -1,0 +1,69 @@
+from collections import deque
+
+class PilhaDeque:
+    def __init__(self):
+        self._pilha = deque()
+
+    def push(self, item):
+        self._pilha.append(item)
+
+    def pop(self):
+        if self._pilha:
+            return self._pilha.pop()
+        else:
+            raise IndexError("A pilha está vazia.")
+
+    def isEmpty(self):
+        return len(self._pilha) == 0
+
+    def __len__(self):
+        return len(self._pilha)
+
+class Node:
+    def __init__(self, valor):
+        self.valor = valor
+        self.proximo = None
+
+class PilhaListaEncadeada:
+    def __init__(self):
+        self.topo = None
+        self.tamanho = 0
+
+    def push(self, item):
+        novo_no = Node(item)
+        novo_no.proximo = self.topo
+        self.topo = novo_no
+        self.tamanho += 1
+
+    def pop(self):
+        if self.topo:
+            valor = self.topo.valor
+            self.topo = self.topo.proximo
+            self.tamanho -= 1
+            return valor
+        else:
+            raise IndexError("A pilha está vazia.")
+
+    def isEmpty(self):
+        return self.tamanho == 0
+
+    def __len__(self):
+        return self.tamanho
+
+# Testando a PilhaDeque
+pilha_deque = PilhaDeque()
+pilha_deque.push(1)
+pilha_deque.push(2)
+print("Tamanho da PilhaDeque:", len(pilha_deque)) 
+print("Removendo da PilhaDeque:", pilha_deque.pop()) 
+print("Removendo da PilhaDeque:", pilha_deque.pop()) 
+print("A pilha está vazia?", pilha_deque.isEmpty())  
+
+# Testando a PilhaListaEncadeada
+pilha_lista_encadeada = PilhaListaEncadeada()
+pilha_lista_encadeada.push(1)
+pilha_lista_encadeada.push(2)
+print("Tamanho da PilhaListaEncadeada:", len(pilha_lista_encadeada))  
+print("Removendo da PilhaListaEncadeada:", pilha_lista_encadeada.pop()) 
+print("Removendo da PilhaListaEncadeada:", pilha_lista_encadeada.pop()) 
+print("A pilha está vazia?", pilha_lista_encadeada.isEmpty())  
