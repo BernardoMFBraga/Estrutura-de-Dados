@@ -111,6 +111,7 @@ bt.insert(3)
 bt.insert(7)
 bt.insert(2)
 bt.insert(4)
+bt.insert(2)  # Inserção de um valor repetido
 bt.insert(6)
 bt.insert(8)
 bt.insert(3)  # Inserção de um valor repetido
@@ -120,7 +121,7 @@ print("Inorder traversal após inserções:", bt.inorder_traversal())
 bt.draw_tree(title="Árvore Binária Após Inserções")
 
 # Exclusões
-bt.delete(3)
+bt.delete(2)
 bt.delete(7)
 
 # Verifica a árvore após as exclusões
